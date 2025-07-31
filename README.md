@@ -4,23 +4,30 @@ Codebase for a fully automated, AI-powered tool that scores the SHAPE-UP assessm
 
 ## Project Overview
 
-The SHAPE-UP scored manually based on videos of subjects performing specific tasks. This project aims to automate that process by:
-- Analyzing video footage of subjects performing tasks.
-- Extracting key joint movements using pose estimation.
-- Classifying performance according to a defined scoring rubric (0–2 scale).
-- Outputting predicted scores aligned with clinical assessment guidelines.
+The SHAPE-UP assessment evaluates how children with AMC perform daily upper-limb tasks. Our Holistic-based solution:
+- Segments tasks from continuous video.
+- Extracts upper body landmarks (shoulder, elbow, wrist, hand, face) using Mediapipe Holistic.
+- Analyzes movement quality and compensatory strategies (e.g., trunk lean, bimanual use).
+- Assigns SHAPE-UP scores automatically (0–2 scale).
+- Outputs a summary CSV per task, ready for clinician review.
 
 ## Project Structure
 ```
-shapeup-ai/
-  ├── data/                # Raw and processed data
-  ├── notebooks/           # Jupyter notebooks for EDA and prototyping
-  ├── models/              # Trained models, weights, checkpoints
-  ├── scripts/             # Python scripts (training, inference, scoring)
-  ├── utils/               # Utility functions (visualization, helpers)
-  ├── app/                 # (Optional) Streamlit or Flask app
-  ├── README.md             # Project overview
-  └── requirements.txt      # Python dependencies
+shapeup-holistic/
+├── run_shapeup_scoring.py        # Entry point: run full scoring pipeline
+├── score_all_tasks.py            # Runs all 8 task scoring modules
+├── tasks/                        # Per-task scoring logic (1 script per task)
+│   ├── pick_up_cheerio.py
+│   ├── bring_to_mouth.py
+│   ├── ...
+├── utils/
+│   ├── common_landmarks.py       # Landmark indices & helper methods
+│   ├── write_summary.py          # Output CSV formatting
+├── models/                       # (Optional) Pretrained models
+├── data/                         # Input videos and scoring outputs
+├── requirements.txt              # Dependencies
+└── README.md                     # Project overview
+
 ```
 
 ## Technologies Used
@@ -30,7 +37,8 @@ shapeup-ai/
 - MediaPipe / OpenPose (for pose estimation)
 - TensorFlow / PyTorch (for modeling)
 - Pandas / NumPy
-- Scikit-learn
+- Scikit-learn (optional for evaluation)
+- Jupyter Notebooks (for debugging and visualization)
 
 
 ### Prerequisites
@@ -38,16 +46,20 @@ shapeup-ai/
 ```bash
 pip install -r requirements.txt
 ```
+Make sure Mediapipe and OpenCV are properly installed. A GPU is recommended for real-time inference.
 
 ## Run The Pipeline
 ```
-python src/pipeline.py --video_path data/videos/sample1.mp4
+python run_shapeup_scoring.py --video_path path/to/input_video.mp4
 ```
 
-## Model Training 
-```To train the scoring model
-python src/train_model.py --config configs/default.yaml
-```
+
+This will:
+- Load the video.
+- Run holistic landmark extraction.
+- Automatically segment and score all SHAPE-UP tasks.
+- Outout a CSV file with task-wise scores.
+
 
 ## SHAPE-UP Scoring Criteria
 ```
