@@ -1,6 +1,6 @@
 # Arthogyropsis Multiplex Congentia
 
-Codebase for an AI-powered tool designed to automate scoring for the SHAPE-UP assessment. Used to measure the upper limb function in children with Arthrogryposis Multiplex Congenita (AMC) in order to enhance the consistency, speed, and accuracy of video-based assessment using computer vision and machine learning.
+Codebase for a fully automated, AI-powered tool that scores the SHAPE-UP assessment using Mediapipe Holistic, integrating pose, hand, and face landmarks to evaluate upper limb function in children with Arthrogryposis Multiplex Congenita (AMC). This system enhances scoring consistency, speed, and objectivity for clinical video assessments.
 
 ## Project Overview
 
