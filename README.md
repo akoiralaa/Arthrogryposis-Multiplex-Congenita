@@ -85,3 +85,7 @@ Model evaluation done using accuracy, F1-Score, and agreement with Clinicial rat
 
 ## License
 Licensed under MIT license. 
+
+![poster](https://github.com/user-attachments/assets/70f1cfc9-2296-47d4-86bf-644b72c3193e)
+
+
